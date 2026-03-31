@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — FRANKO CLOTHING</title>
+  <meta name="description" content="Browse our full collection of premium suits, shirts, shoes, and accessories." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <style>
+    /* ---- SHOP HERO / PAGE HEADER ---- */
+    .shop-hero {
+      background: var(--cream);
+      padding: 8rem 0 3rem;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .shop-hero::before {
+      content: 'SHOP';
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: clamp(8rem, 18vw, 16rem);
+      font-weight: 700;
+      color: rgba(201,168,76,0.06);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .shop-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ---- MAIN SHOP AREA ---- */
+    .shop-section {
+      padding: 4rem 0 6rem;
+    }
+
+    /* Filter bar with tab + search/sort row */
+    .shop-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .shop-result-count {
+      font-size: 0.8rem;
+      color: var(--mid);
+      letter-spacing: 0.05em;
+    }
+
+    .shop-sort {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      color: var(--mid);
+    }
+
+    .shop-sort select {
+      border: 1px solid var(--border);
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+      font-family: var(--font-body);
+      color: var(--dark);
+      background: var(--white);
+      cursor: pointer;
+      outline: none;
+    }
+
+    .shop-sort select:focus {
+      border-color: var(--gold);
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    /* No results message */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 4rem 0;
+      color: var(--mid);
+    }
+
+    .no-results i {
+      font-size: 3rem;
+      color: var(--light-gray);
+      margin-bottom: 1rem;
+    }
+
+    /* ---- WALKING STICKS SPECIAL BADGE ---- */
+    .product-badge.badge-special {
+      background: var(--dark);
+    }
+
+    @media (max-width: 1100px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .filter-tabs { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 0.3rem; }
+      .filter-tab { white-space: nowrap; }
+    }
+
+    @media (max-width: 480px) {
+      .products-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+  <a href="../index.html" class="navbar-brand"><img src="../images/logo.png" alt="FRANKO CLOTHING" class="nav-logo"></a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="shop.html" class="active">Shop</a>
+    <a href="about.html">Our Story</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="d-flex align-items-center gap-3">
+    <div class="nav-cart" onclick="openCart()" title="View Cart">
+      <i class="bi bi-bag"></i>
+      <span class="cart-badge" style="display:none;">0</span>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="../index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="about.html">Our Story</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- =====================
+     SHOP HERO HEADER
+     ===================== -->
+<section class="shop-hero">
+  <div class="container shop-hero-content">
+    <div class="reveal">
+      <div class="section-label">Full Collection</div>
+      <h1 class="section-title">The Franko Shop</h1>
+      <div class="gold-line"></div>
+      <p class="section-subtitle mt-3">
+        Every piece handpicked for the man who demands excellence.
+        Filter by category and discover your next statement.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     MAIN SHOP SECTION
+     ===================== -->
+<section class="shop-section">
+  <div class="container">
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs reveal">
+      <button class="filter-tab active" data-filter="all">All Products</button>
+      <button class="filter-tab" data-filter="suits">Suits</button>
+      <button class="filter-tab" data-filter="shirts">Shirts</button>
+      <button class="filter-tab" data-filter="shoes">Shoes</button>
+      <button class="filter-tab" data-filter="accessories">Accessories</button>
+      <button class="filter-tab" data-filter="sticks">Walking Sticks</button>
+    </div>
+
+    <!-- Toolbar: count + sort -->
+    <div class="shop-toolbar reveal">
+      <div class="shop-result-count" id="resultCount">Showing all products</div>
+      <div class="shop-sort">
+        <i class="bi bi-sort-down"></i>
+        <span>Sort by:</span>
+        <select id="sortSelect" onchange="sortProducts()">
+          <option value="default">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name">Name A–Z</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products-grid stagger-children" id="productsGrid">
+
+      <!-- ===== SUITS ===== -->
+      <div class="product-card reveal" data-category="suits" data-price="480" data-name="The Executive Suit">
+        <div class="product-image">
+          <img src="../images/suits/Double-Breasted Navy Suit (Sartorial Style).jfif" alt="Suit 001" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">New</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('The Executive Suit', 480, 'Suits', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('The Executive Suit', 480)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Suits</div>
+          <div class="product-name">The Executive Suit</div>
+          <div class="product-price">$480</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="suits" data-price="560" data-name="The Boardroom Two-Piece">
+        <div class="product-image">
+          <img src="../images/suits/grey-and-black-suit.jpg" alt="Suit 002" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('The Boardroom Two-Piece', 560, 'Suits', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('The Boardroom Two-Piece', 560)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Suits</div>
+          <div class="product-name">The Boardroom Two-Piece</div>
+          <div class="product-price">$560</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="suits" data-price="720" data-name="Three-Piece Signature Suit">
+        <div class="product-image">
+          <img src="../images/suits/three-piece-suit-brown.jfif" alt="Suit 003" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">Bestseller</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Three-Piece Signature Suit', 720, 'Suits', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Three-Piece Signature Suit', 720)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Suits</div>
+          <div class="product-name">Three-Piece Signature Suit</div>
+          <div class="product-price">$720</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="suits" data-price="390" data-name="Classic Charcoal Suit">
+        <div class="product-image">
+          <img src="../images/suits/charcoal-suit.jfif" alt="Suit 004" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Classic Charcoal Suit', 390, 'Suits', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Classic Charcoal Suit', 390)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Suits</div>
+          <div class="product-name">Classic Charcoal Suit</div>
+          <div class="product-price">$390</div>
+        </div>
+      </div>
+
+      <!-- ===== SHIRTS ===== -->
+      <div class="product-card reveal" data-category="shirts" data-price="95" data-name="Oxford Dress Shirt">
+        <div class="product-image">
+          <img src="../images/shirts/shirt.jfif" alt="Shirt 001" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">New</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Oxford Dress Shirt', 95, 'Shirts', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Oxford Dress Shirt', 95)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirts</div>
+          <div class="product-name">Oxford Dress Shirt</div>
+          <div class="product-price">$95</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="shirts" data-price="110" data-name="Slim Fit Linen Shirt">
+        <div class="product-image">
+          <img src="../images/shirts/french-linen-shirts.jfif" alt="Shirt 002" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Slim Fit Linen Shirt', 110, 'Shirts', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Slim Fit Linen Shirt', 110)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirts</div>
+          <div class="product-name">Slim Fit Linen Shirt</div>
+          <div class="product-price">$110</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="shirts" data-price="85" data-name="French Cuff Formal Shirt">
+        <div class="product-image">
+          <img src="../images/shirts/Men's French cufflinks shirt, men's slim fit long sleeved business sleeve nail free business formal.jfif" alt="Shirt 003" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">Bestseller</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('French Cuff Formal Shirt', 85, 'Shirts', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('French Cuff Formal Shirt', 85)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirts</div>
+          <div class="product-name">French Cuff Formal Shirt</div>
+          <div class="product-price">$85</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="shirts" data-price="75" data-name="Classic White Poplin">
+        <div class="product-image">
+          <img src="../images/shirts/Chemise à manches longues en pur coton pour hommes, chemise Oxford, chemisiers de travail, col.jfif" alt="Shirt 004" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Classic White Poplin', 75, 'Shirts', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Classic White Poplin', 75)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirts</div>
+          <div class="product-name">Classic White Poplin</div>
+          <div class="product-price">$75</div>
+        </div>
+      </div>
+
+      <!-- ===== SHOES ===== -->
+      <div class="product-card reveal" data-category="shoes" data-price="220" data-name="Oxford Leather Derby">
+        <div class="product-image">
+          <img src="../images/shoes/shoes-001 (3).jpg" alt="Shoes 001" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">Bestseller</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Oxford Leather Derby', 220, 'Shoes', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Oxford Leather Derby', 220)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shoes</div>
+          <div class="product-name">Oxford Leather Derby</div>
+          <div class="product-price">$220</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="shoes" data-price="185" data-name="Monk Strap Loafer">
+        <div class="product-image">
+          <img src="../images/shoes/Men's Brown Double Monk Strap Leather Dress Shoes - Formal Handmade Footwear.jfif" alt="Shoes 002" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Monk Strap Loafer', 185, 'Shoes', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Monk Strap Loafer', 185)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shoes</div>
+          <div class="product-name">Monk Strap Loafer</div>
+          <div class="product-price">$185</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="shoes" data-price="260" data-name="Brogue Cap Toe">
+        <div class="product-image">
+          <img src="../images/shoes/oxford-pin-toe-shoes-black.jfif" alt="Shoes 003" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">New</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Brogue Cap Toe', 260, 'Shoes', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Brogue Cap Toe', 260)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shoes</div>
+          <div class="product-name">Brogue Cap Toe</div>
+          <div class="product-price">$260</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="shoes" data-price="195" data-name="Chelsea Boot Classic">
+        <div class="product-image">
+          <img src="../images/shoes/chelsea-boots-black-classic.jfif" alt="Shoes 004" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Chelsea Boot Classic', 195, 'Shoes', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Chelsea Boot Classic', 195)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shoes</div>
+          <div class="product-name">Chelsea Boot Classic</div>
+          <div class="product-price">$195</div>
+        </div>
+      </div>
+
+      <!-- ===== ACCESSORIES ===== -->
+      <div class="product-card reveal" data-category="accessories" data-price="55" data-name="Silk Pocket Square">
+        <div class="product-image">
+          <img src="../images/accessories/Women's & Men's Clothing, Shop Online Fashion.jfif" alt="Acc 001" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Silk Pocket Square', 55, 'Accessories', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Silk Pocket Square', 55)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Accessories</div>
+          <div class="product-name">Silk Pocket Square</div>
+          <div class="product-price">$55</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="accessories" data-price="75" data-name="Woven Silk Tie">
+        <div class="product-image">
+          <img src="../images/accessories/My cane collection_ Just because I have to use a cane for the rest of my life, doenst mean I can have a few with some panache!.jfif" alt="Acc 002" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">New</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('wooden cane collection', 75, 'Accessories', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('wooden cane collection', 75)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Accessories</div>
+          <div class="product-name">wooden cane collection</div>
+          <div class="product-price">$75</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="accessories" data-price="120" data-name="Gold Cufflinks Set">
+        <div class="product-image">
+          <img src="../images/accessories/KEMISANT Men Belt 2Pack – Genuine Leather Belt for Men Dress Casual Golf Jeans 1 3_8_.jfif" alt="Acc 003" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">Bestseller</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('KEMISANT Men Belt 2Pack', 120, 'Accessories', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('KEMISANT Men Belt 2Pack', 120)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Accessories</div>
+          <div class="product-name">KEMISANT Men Belt 2Pack</div>
+          <div class="product-price">$120</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="accessories" data-price="90" data-name="Premium Leather Belt">
+        <div class="product-image">
+          <img src="../images/accessories/download (7).jfif" alt="Acc 004" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Premium Brown Gold Tip Cane', 90, 'Accessories', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Premium Brown Gold Tip Cane', 90)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Accessories</div>
+          <div class="product-name">Premium Brown Gold Tip Cane</div>
+          <div class="product-price">$90</div>
+        </div>
+      </div>
+
+      <!-- ===== AFRICAN AGBADA ===== -->
+      <div class="product-card reveal" data-category="agbada" data-price="180" data-name="African traditional agbada attire">
+        <div class="product-image">
+          <img src="../images/Custom brown  embroidered Nigerian AGBADA for men.jfif" alt="/Custom brown  embroidered Nigerian AGBADA for men" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge badge-special">Signature</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Custom brown  embroidered Nigerian AGBADA for men', 180, 'Agbada', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Custom brown  embroidered Nigerian AGBADA for men', 180)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">African Attire</div>
+          <div class="product-name">Custom brown embroidered Nigerian AGBADA for men</div>
+          <div class="product-price">$180</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="Agbada" data-price="240" data-name="Custom deep blue Agbada">
+        <div class="product-image">
+          <img src="../images/Custom deep blue Agbada.jfif" alt="Custom deep blue Agbada" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge badge-special">Signature</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Custom deep blue Agbada', 240, 'Agbada', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Gold-Tipped Royal Cane', 240)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">African Attire</div>
+          <div class="product-name">Custom deep blue Agbada</div>
+          <div class="product-price">$240</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="Agbada" data-price="320" data-name="Custom White Agbada">
+        <div class="product-image">
+          <img src="../images/Custom White Agbada.jfif" alt="Custom White Agbada" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge badge-special">Handcrafted</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Custom White Agbada', 320, 'Agbada', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Custom White Agbada', 320)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">African Attire</div>
+          <div class="product-name">Custom White Agbada</div>
+          <div class="product-price">$320</div>
+        </div>
+      </div>
+
+      <div class="product-card reveal" data-category="Agbada" data-price="160" data-name="Brown custom Agbada">
+        <div class="product-image">
+          <img src="../images/Brown custom Agbada.jfif" alt="Brown custom Agbada" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Brown custom Agbada', 160, 'Agbada', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Brown custom Agbada', 160)">
+              <i class="bi bi-whatsapp"></i> Buy
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">African Attire</div>
+          <div class="product-name">Brown custom Agbada</div>
+          <div class="product-price">$160</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="reveal">
+        <div class="footer-brand-name">FRANKO<span>_CLOTHING</span></div>
+        <p class="footer-tagline">Premium menswear for the modern gentleman. Based in the DMV. Shipped with intention, worn with distinction.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-link" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-link" title="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" class="social-link" title="X / Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://wa.me/2347068935733" class="social-link" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Shop</div>
+        <div class="footer-links">
+          <a href="shop.html?cat=suits">Suits</a>
+          <a href="shop.html?cat=shirts">Shirts</a>
+          <a href="shop.html?cat=shoes">Shoes</a>
+          <a href="shop.html?cat=accessories">Accessories</a>
+          <a href="shop.html">New Arrivals</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="about.html">Our Story</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="#">Lookbook</a>
+          <a href="#">Size Guide</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Get in Touch</div>
+        <div class="footer-links">
+          <a href="https://wa.me/2347068935733"><i class="bi bi-whatsapp me-2"></i>WhatsApp Us</a>
+          <a href="mailto:hello@frankoclothing.com"><i class="bi bi-envelope me-2"></i>Email Us</a>
+          <a href="#"><i class="bi bi-geo-alt me-2"></i>DMV Area, USA</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 FRANKO CLOTHING. All rights reserved.</span>
+      <span>Designed for the distinguished gentleman.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">$0</span>
+    </div>
+    <button class="btn btn-primary cart-checkout-btn" onclick="checkoutViaWhatsApp()">
+      <i class="bi bi-whatsapp"></i> Checkout via WhatsApp
+    </button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  /* Read URL param to pre-select a category tab on page load */
+  document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('cat');
+    if (cat) {
+      const tab = document.querySelector(`.filter-tab[data-filter="${cat}"]`);
+      if (tab) tab.click();
+    }
+    updateResultCount();
+  });
+
+  /* Update product count text */
+  function updateResultCount() {
+    const visible = document.querySelectorAll('.product-card[data-category]:not([style*="display: none"])').length;
+    const countEl = document.getElementById('resultCount');
+    if (countEl) countEl.textContent = `Showing ${visible} product${visible !== 1 ? 's' : ''}`;
+  }
+
+  /* Sort products in the grid */
+  function sortProducts() {
+    const val = document.getElementById('sortSelect').value;
+    const grid = document.getElementById('productsGrid');
+    const cards = Array.from(grid.querySelectorAll('.product-card[data-category]'));
+
+    cards.sort((a, b) => {
+      if (val === 'price-asc') return +a.dataset.price - +b.dataset.price;
+      if (val === 'price-desc') return +b.dataset.price - +a.dataset.price;
+      if (val === 'name') return a.dataset.name.localeCompare(b.dataset.name);
+      return 0;
+    });
+
+    cards.forEach(card => grid.appendChild(card));
+  }
+
+  /* Update count whenever a filter tab is clicked */
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => setTimeout(updateResultCount, 50));
+  });
+</script>
+</body>
+</html>

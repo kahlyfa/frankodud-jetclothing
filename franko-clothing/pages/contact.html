@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — FRANKO CLOTHING</title>
+  <meta name="description" content="Get in touch with FRANKO CLOTHING. DM us on WhatsApp for orders, questions, and styling advice." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <style>
+    /* ---- PAGE HEADER ---- */
+    .contact-hero {
+      background: var(--cream);
+      padding: 9rem 0 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-hero::after {
+      content: 'CONTACT';
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 16vw, 14rem);
+      font-weight: 700;
+      color: rgba(201,168,76,0.07);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* ---- CONTACT MAIN ---- */
+    .contact-section {
+      padding: 6rem 0;
+      background: var(--white);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* Left: Info */
+    .contact-info-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-info-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info-title em {
+      font-style: italic;
+      color: var(--gold-dark);
+    }
+
+    .contact-info-text {
+      font-size: 0.9rem;
+      color: var(--mid);
+      line-height: 1.9;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Contact detail items */
+    .contact-detail {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .contact-detail:last-of-type {
+      border-bottom: none;
+    }
+
+    .contact-detail-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--champagne);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-dark);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .contact-detail-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-detail-value {
+      font-size: 0.9rem;
+      color: var(--dark);
+      font-weight: 500;
+    }
+
+    .contact-detail-value a {
+      color: var(--dark);
+      transition: var(--transition);
+    }
+
+    .contact-detail-value a:hover {
+      color: var(--gold-dark);
+    }
+
+    /* ---- FORM SIDE ---- */
+    .contact-form-wrap {
+      background: var(--off-white);
+      padding: 3rem;
+      border: 1px solid var(--border);
+    }
+
+    .form-heading {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-subtext {
+      font-size: 0.82rem;
+      color: var(--mid);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.4rem;
+    }
+
+    .form-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .form-control,
+    .form-select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--white);
+      padding: 0.8rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--dark);
+      outline: none;
+      transition: var(--transition);
+      border-radius: 0;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    /* WhatsApp primary CTA */
+    .whatsapp-cta-block {
+      background: var(--black);
+      padding: 4rem 0;
+    }
+
+    .whatsapp-cta-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .whatsapp-cta-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.3;
+    }
+
+    .whatsapp-cta-text em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .whatsapp-cta-sub {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+      margin-top: 0.5rem;
+    }
+
+    /* Social follow section */
+    .social-section {
+      padding: 5rem 0;
+      background: var(--cream);
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .social-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      padding: 2rem 1rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-card i {
+      font-size: 1.8rem;
+      color: var(--mid);
+      transition: var(--transition);
+    }
+
+    .social-card span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .social-card:hover {
+      border-color: var(--gold);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .social-card:hover i {
+      color: var(--gold);
+    }
+
+    .social-card:hover span {
+      color: var(--gold-dark);
+    }
+
+    @media (max-width: 992px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .social-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 576px) {
+      .contact-form-wrap { padding: 2rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .social-grid { grid-template-columns: repeat(2, 1fr); }
+      .whatsapp-cta-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+  <a href="../index.html" class="navbar-brand"><img src="../images/logo.png" alt="FRANKO CLOTHING" class="nav-logo"></a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="about.html">Our Story</a>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+  <div class="d-flex align-items-center gap-3">
+    <div class="nav-cart" onclick="openCart()" title="View Cart">
+      <i class="bi bi-bag"></i>
+      <span class="cart-badge" style="display:none;">0</span>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="../index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="about.html">Our Story</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- =====================
+     PAGE HERO
+     ===================== -->
+<section class="contact-hero">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Reach Out</div>
+      <h1 class="section-title">We'd Love to<br>Hear From You</h1>
+      <div class="gold-line"></div>
+      <p class="section-subtitle mt-3">
+        Questions about sizing, orders, or styling? Our team is ready to assist.
+        The fastest way to reach us is via WhatsApp.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 1: CONTACT MAIN
+     ===================== -->
+<section class="contact-section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Left: Info block -->
+      <div class="reveal reveal-left">
+        <div class="contact-info-label">Contact Info</div>
+        <h2 class="contact-info-title">
+          We're always<br><em>here for you.</em>
+        </h2>
+        <p class="contact-info-text">
+          Whether you're placing an order, need styling guidance, or simply want
+          to learn more about the brand — don't hesitate to reach out. We respond
+          promptly via WhatsApp.
+        </p>
+
+        <!-- WhatsApp -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="bi bi-whatsapp"></i></div>
+          <div>
+            <div class="contact-detail-label">WhatsApp (Preferred)</div>
+            <div class="contact-detail-value">
+              <a href="https://wa.me/2347068935733">+123 xxx xxx xxx</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Email -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="bi bi-envelope"></i></div>
+          <div>
+            <div class="contact-detail-label">Email</div>
+            <div class="contact-detail-value">
+              <a href="mailto:hello@frankoclothing.com">hello@frankoclothing.com</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="bi bi-geo-alt"></i></div>
+          <div>
+            <div class="contact-detail-label">Location</div>
+            <div class="contact-detail-value">DMV Area — Washington D.C., Maryland & Virginia</div>
+          </div>
+        </div>
+
+        <!-- Hours -->
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="bi bi-clock"></i></div>
+          <div>
+            <div class="contact-detail-label">Response Hours</div>
+            <div class="contact-detail-value">Mon – Sat: 9AM – 8PM EST</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Contact Form -->
+      <div class="reveal reveal-right">
+        <div class="contact-form-wrap">
+          <div class="form-heading">Send a Message</div>
+          <p class="form-subtext">Fill out the form below and we'll get back to you promptly.</p>
+
+          <!-- Note: Form submits via WhatsApp. No backend required. -->
+          <div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" placeholder="John" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Doe" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address</label>
+              <input type="email" class="form-control" id="email" placeholder="john@example.com" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="subject">Subject</label>
+              <select class="form-control form-select" id="subject">
+                <option value="">Select a subject...</option>
+                <option>Place an Order</option>
+                <option>Product Inquiry</option>
+                <option>Sizing Help</option>
+                <option>Shipping Question</option>
+                <option>General Inquiry</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="message">Message</label>
+              <textarea class="form-control" id="message" placeholder="Tell us what you need..."></textarea>
+            </div>
+
+            <!-- Submit sends to WhatsApp with form content -->
+            <button class="btn btn-primary w-100 justify-content-center" onclick="submitContactForm()" style="padding:1rem;">
+              <i class="bi bi-whatsapp"></i> &nbsp;Send via WhatsApp
+            </button>
+
+            <p style="font-size:0.72rem; color:var(--mid); text-align:center; margin-top:0.8rem;">
+              <i class="bi bi-info-circle me-1"></i>
+              This will open WhatsApp with your message pre-filled.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 2: WHATSAPP CTA
+     ===================== -->
+<section class="whatsapp-cta-block">
+  <div class="container">
+    <div class="whatsapp-cta-inner reveal">
+      <div>
+        <div class="whatsapp-cta-text">
+          Prefer to chat directly?<br>
+          <em>Message us on WhatsApp.</em>
+        </div>
+        <div class="whatsapp-cta-sub">
+          Fastest response guaranteed. Available Mon–Sat, 9AM–8PM EST.
+        </div>
+      </div>
+      <a href="https://wa.me/2347068935733" target="_blank" class="btn btn-primary" style="font-size:0.8rem; padding:1rem 2.2rem;">
+        <i class="bi bi-whatsapp" style="font-size:1.1rem;"></i> &nbsp;Open WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 3: SOCIAL LINKS
+     ===================== -->
+<section class="social-section">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label">Follow Us</div>
+      <h2 class="section-title">Stay Connected</h2>
+      <div class="gold-line centered"></div>
+      <p class="section-subtitle mt-3 mx-auto">
+        Follow FRANKO CLOTHING on social media for the latest arrivals,
+        styling inspiration, and exclusive drops.
+      </p>
+    </div>
+
+    <div class="social-grid stagger-children">
+      <a href="#" class="social-card reveal" title="Follow on Instagram">
+        <i class="bi bi-instagram"></i>
+        <span>Instagram</span>
+      </a>
+      <a href="#" class="social-card reveal" title="Follow on Facebook">
+        <i class="bi bi-facebook"></i>
+        <span>Facebook</span>
+      </a>
+      <a href="#" class="social-card reveal" title="Follow on TikTok">
+        <i class="bi bi-tiktok"></i>
+        <span>TikTok</span>
+      </a>
+      <a href="#" class="social-card reveal" title="Follow on X">
+        <i class="bi bi-twitter-x"></i>
+        <span>X / Twitter</span>
+      </a>
+      <a href="https://wa.me/2347068935733" class="social-card reveal" title="Chat on WhatsApp">
+        <i class="bi bi-whatsapp"></i>
+        <span>WhatsApp</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="reveal">
+        <div class="footer-brand-name">FRANKO<span>.</span></div>
+        <p class="footer-tagline">Premium menswear for the modern gentleman. Based in the DMV. Shipped with intention, worn with distinction.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-link" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-link" title="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" class="social-link" title="X / Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://wa.me/2347068935733" class="social-link" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Shop</div>
+        <div class="footer-links">
+          <a href="shop.html?cat=suits">Suits</a>
+          <a href="shop.html?cat=shirts">Shirts</a>
+          <a href="shop.html?cat=shoes">Shoes</a>
+          <a href="shop.html?cat=accessories">Accessories</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="about.html">Our Story</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="#">Lookbook</a>
+          <a href="#">Size Guide</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Get in Touch</div>
+        <div class="footer-links">
+          <a href="https://wa.me/2347068935733"><i class="bi bi-whatsapp me-2"></i>WhatsApp Us</a>
+          <a href="mailto:hello@frankoclothing.com"><i class="bi bi-envelope me-2"></i>Email Us</a>
+          <a href="#"><i class="bi bi-geo-alt me-2"></i>DMV Area, USA</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 FRANKO CLOTHING. All rights reserved.</span>
+      <span>Designed for the distinguished gentleman.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div>
+    <button class="btn btn-primary cart-checkout-btn" onclick="checkoutViaWhatsApp()">
+      <i class="bi bi-whatsapp"></i> Checkout via WhatsApp
+    </button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/main.js"></script>
+<script>
+  /* Build WhatsApp message from contact form fields and open chat */
+  function submitContactForm() {
+    const first    = document.getElementById('firstName').value.trim();
+    const last     = document.getElementById('lastName').value.trim();
+    const email    = document.getElementById('email').value.trim();
+    const subject  = document.getElementById('subject').value;
+    const message  = document.getElementById('message').value.trim();
+
+    /* Require at least name and message */
+    if (!first || !message) {
+      alert('Please fill in your name and message before submitting.');
+      return;
+    }
+
+    const name    = [first, last].filter(Boolean).join(' ');
+    const subLine = subject ? `*Subject:* ${subject}\n` : '';
+    const emailLine = email ? `*Email:* ${email}\n` : '';
+
+    const text = `Hello FRANKO CLOTHING 👋\n\n*Name:* ${name}\n${emailLine}${subLine}\n${message}`;
+    const url  = `https://wa.me/2347068935733?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  }
+</script>
+</body>
+</html>

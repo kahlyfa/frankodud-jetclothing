@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Story — FRANKO CLOTHING</title>
+  <meta name="description" content="The story behind FRANKO CLOTHING — DMV's premium menswear brand built by Franko Bud'jet." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/style.css" />
+
+  <style>
+    /* ---- PAGE HERO ---- */
+    .about-hero {
+      min-height: 60vh;
+      background: var(--black);
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 4rem;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: var(--black);
+      z-index: 0;
+    }
+
+    .about-hero-bg .img-placeholder {
+      height: 100%;
+      opacity: 0.35;
+      background: rgba(255,255,255,0.02);
+      color: rgba(255,255,255,0.1);
+    }
+
+    .about-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.9) 30%, rgba(0,0,0,0.2) 100%);
+      z-index: 1;
+    }
+
+    .about-hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.05;
+    }
+
+    .about-hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    /* ---- INTRO ---- */
+    .about-intro {
+      padding: 6rem 0;
+      background: var(--white);
+    }
+
+    .about-intro-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .about-intro-image {
+      aspect-ratio: 4/5;
+      position: relative;
+    }
+
+    .about-intro-image::after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      border-bottom: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+    }
+
+    .about-large-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 300;
+      line-height: 1.4;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .about-large-text em {
+      font-style: italic;
+      color: var(--gold-dark);
+    }
+
+    /* ---- VALUES SECTION ---- */
+    .values-section {
+      padding: 6rem 0;
+      background: var(--cream);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3.5rem;
+    }
+
+    .value-card {
+      background: var(--white);
+      padding: 2.5rem 2rem;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .value-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.5s ease;
+    }
+
+    .value-card:hover::before {
+      height: 100%;
+    }
+
+    .value-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--champagne);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--gold-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .value-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--black);
+    }
+
+    .value-text {
+      font-size: 0.875rem;
+      color: var(--mid);
+      line-height: 1.8;
+    }
+
+    /* ---- FOUNDER SECTION ---- */
+    .founder-section {
+      padding: 6rem 0;
+      background: var(--white);
+    }
+
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .founder-image-wrap {
+      position: sticky;
+      top: 100px;
+    }
+
+    .founder-image {
+      aspect-ratio: 3/4;
+      background: var(--cream);
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .founder-image::before {
+      content: '';
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      right: -16px;
+      bottom: -16px;
+      border: 1px solid var(--gold-light);
+      z-index: -1;
+    }
+
+    .founder-name {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .founder-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.3rem;
+    }
+
+    .founder-story-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 300;
+      line-height: 1.25;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .founder-story-title em {
+      font-style: italic;
+      color: var(--gold-dark);
+    }
+
+    .founder-para {
+      font-size: 0.92rem;
+      color: var(--mid);
+      line-height: 1.95;
+      margin-bottom: 1.4rem;
+    }
+
+    .founder-quote {
+      border-left: 3px solid var(--gold);
+      padding: 1.2rem 1.5rem;
+      margin: 2.5rem 0;
+      background: var(--cream);
+    }
+
+    .founder-quote-text {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--dark);
+      line-height: 1.5;
+    }
+
+    .founder-quote-attr {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 0.8rem;
+    }
+
+    /* ---- MILESTONES ---- */
+    .milestones-section {
+      padding: 6rem 0;
+      background: var(--black);
+    }
+
+    .milestones-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .milestones-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .milestone-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 4rem;
+    }
+
+    .milestone-item {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+    }
+
+    .milestone-year {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .milestone-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+    }
+
+    .milestone-text {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+
+    /* CTA strip */
+    .about-cta {
+      background: var(--champagne);
+      padding: 5rem 0;
+      text-align: center;
+    }
+
+    @media (max-width: 992px) {
+      .about-intro-grid,
+      .founder-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-intro-image { max-width: 400px; }
+      .founder-image-wrap { position: static; }
+      .milestone-row { grid-template-columns: repeat(2, 1fr); }
+      .values-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .milestone-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+  <a href="../index.html" class="navbar-brand"><img src="../images/logo.png" alt="FRANKO CLOTHING" class="nav-logo"></a>
+  <div class="nav-links">
+    <a href="../index.html">Home</a>
+    <a href="shop.html">Shop</a>
+    <a href="about.html" class="active">Our Story</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="d-flex align-items-center gap-3">
+    <div class="nav-cart" onclick="openCart()" title="View Cart">
+      <i class="bi bi-bag"></i>
+      <span class="cart-badge" style="display:none;">0</span>
+    </div>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <a href="../index.html">Home</a>
+  <a href="shop.html">Shop</a>
+  <a href="about.html">Our Story</a>
+  <a href="contact.html">Contact</a>
+</div>
+
+<!-- =====================
+     HERO
+     ===================== -->
+<section class="about-hero">
+  <div class="about-hero-bg">
+    <img src="../images/about/hero-about.jfif" alt="Hero About" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+  </div>
+  <div class="about-hero-overlay"></div>
+  <div class="container about-hero-content">
+    <div class="reveal">
+      <div class="section-label" style="color:var(--gold);">Our Story</div>
+      <h1 class="about-hero-title">
+        More Than Clothing —<br>
+        <em>A Statement of Identity.</em>
+      </h1>
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 1: INTRO
+     ===================== -->
+<section class="about-intro">
+  <div class="container">
+    <div class="about-intro-grid">
+
+      <div class="about-intro-image reveal reveal-left">
+        <img src="../images/about/intro-image.jpg" alt="Intro Image" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+
+      <div class="reveal reveal-right">
+        <div class="section-label">Who We Are</div>
+        <h2 class="about-large-text">
+          We dress men who understand that <em>how you show up matters.</em>
+        </h2>
+        <div class="gold-line"></div>
+        <p style="font-size:0.92rem; color:var(--mid); line-height:1.9; margin-top:1.5rem;">
+          FRANKO CLOTHING is a premium menswear brand rooted in the DMV — Washington D.C.,
+          Maryland, and Virginia. We curate clothing and accessories that carry weight:
+          the weight of craftsmanship, of intention, and of commanding respect.
+        </p>
+        <p style="font-size:0.92rem; color:var(--mid); line-height:1.9; margin-top:1rem;">
+          From boardroom-ready suits to distinguished walking staffs, every product in our
+          collection is selected with one man in mind — the man who never settles.
+        </p>
+        <a href="shop.html" class="btn btn-primary mt-4">
+          <i class="bi bi-grid-3x3-gap"></i> Explore the Collection
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 2: VALUES
+     ===================== -->
+<section class="values-section">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label">What We Stand For</div>
+      <h2 class="section-title">Our Principles</h2>
+      <div class="gold-line centered"></div>
+    </div>
+
+    <div class="values-grid stagger-children">
+
+      <div class="value-card reveal">
+        <div class="value-icon"><i class="bi bi-gem"></i></div>
+        <div class="value-title">Uncompromising Quality</div>
+        <p class="value-text">
+          Every fabric, every stitch, every sole is held to a standard most brands
+          won't commit to. We don't cut corners — because the men we dress don't either.
+        </p>
+      </div>
+
+      <div class="value-card reveal">
+        <div class="value-icon"><i class="bi bi-person-check"></i></div>
+        <div class="value-title">Intentional Style</div>
+        <p class="value-text">
+          Great style is never accidental. We curate pieces that tell a story — your story.
+          Every item you wear from FRANKO speaks before you do.
+        </p>
+      </div>
+
+      <div class="value-card reveal">
+        <div class="value-icon"><i class="bi bi-shield-check"></i></div>
+        <div class="value-title">Built to Last</div>
+        <p class="value-text">
+          We are not fast fashion. Our pieces are investments — in your presence,
+          your confidence, and your legacy. Buy once, wear forever.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 3: FOUNDER
+     ===================== -->
+<section class="founder-section">
+  <div class="container">
+    <div class="founder-grid">
+
+      <!-- Sticky image column -->
+      <div class="founder-image-wrap reveal reveal-left">
+        <div class="founder-image">
+          <img src="../images/about/founder-franko.jpg" alt="Founder Franko" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="founder-name">Franko Bud'jet</div>
+        <div class="founder-title">Founder & CEO, FRANKO CLOTHING</div>
+      </div>
+
+      <!-- Story text column -->
+      <div class="reveal reveal-right">
+        <div class="section-label">The Founder</div>
+        <h2 class="founder-story-title">
+          A man with a vision<br>and the <em>discipline to execute it.</em>
+        </h2>
+
+        <p class="founder-para">
+          Franko Bud'jet didn't start a clothing brand. He built a philosophy and put fabric to it.
+          Growing up in the DMV, Franko understood early on that how a man dresses signals
+          how he sees himself — and how the world treats him in return.
+        </p>
+
+        <p class="founder-para">
+          After years of struggling to find pieces that matched his taste and standard,
+          Franko decided to curate his own. He sourced premium suits, hand-selected every shirt,
+          and tracked down craftsmen who made walking staffs worthy of the men who would carry them.
+        </p>
+
+        <div class="founder-quote reveal">
+          <div class="founder-quote-text">
+            "Every man I've ever admired — the ones who moved rooms when they walked in —
+            they all had one thing in common: they dressed with intention."
+          </div>
+          <div class="founder-quote-attr">— Franko Bud'jet, Founder</div>
+        </div>
+
+        <p class="founder-para">
+          Today, FRANKO CLOTHING serves discerning men across the DMV and beyond,
+          becoming the trusted name for gentlemen who refuse to be ordinary.
+          The brand is more than a store — it is a standard.
+        </p>
+
+        <a href="contact.html" class="btn btn-outline">
+          <i class="bi bi-chat-square-text"></i> Get in Touch
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 4: MILESTONES
+     ===================== -->
+<section class="milestones-section">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label" style="color:var(--gold);">The Journey</div>
+      <h2 class="milestones-title">
+        Building a <em>legacy,</em><br>one suit at a time.
+      </h2>
+    </div>
+
+    <div class="milestone-row stagger-children">
+
+      <div class="milestone-item reveal">
+        <div class="milestone-year">The Beginning</div>
+        <div class="milestone-title">The Vision is Born</div>
+        <p class="milestone-text">Franko Bud'jet sets out to create the DMV's most distinguished menswear destination.</p>
+      </div>
+
+      <div class="milestone-item reveal">
+        <div class="milestone-year">First Collection</div>
+        <div class="milestone-title">Suits & Shirts Launch</div>
+        <p class="milestone-text">The first curated collection of premium suits and dress shirts drops to an eager clientele.</p>
+      </div>
+
+      <div class="milestone-item reveal">
+        <div class="milestone-year">Expansion</div>
+        <div class="milestone-title">Shoes & Accessories Added</div>
+        <p class="milestone-text">The full gentleman's wardrobe takes shape with shoes, belts, cufflinks, and pocket squares.</p>
+      </div>
+
+      <div class="milestone-item reveal">
+        <div class="milestone-year">Signature Line</div>
+        <div class="milestone-title">Walking Sticks & Staffs</div>
+        <p class="milestone-text">The legendary walking staff line launches — handcrafted, iconic, and instantly iconic in the DMV.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     FOOTER
+     ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="reveal">
+        <div class="footer-brand-name">FRANKO<span>_CLOTHING</span></div>
+        <p class="footer-tagline">Premium menswear for the modern gentleman. Based in the DMV. Shipped with intention, worn with distinction.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-link" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-link" title="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" class="social-link" title="X / Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://wa.me/2347068935733" class="social-link" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Shop</div>
+        <div class="footer-links">
+          <a href="shop.html?cat=suits">Suits</a>
+          <a href="shop.html?cat=shirts">Shirts</a>
+          <a href="shop.html?cat=shoes">Shoes</a>
+          <a href="shop.html?cat=accessories">Accessories</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="about.html">Our Story</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="#">Lookbook</a>
+          <a href="#">Size Guide</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="footer-heading">Get in Touch</div>
+        <div class="footer-links">
+          <a href="https://wa.me/2347068935733"><i class="bi bi-whatsapp me-2"></i>WhatsApp Us</a>
+          <a href="mailto:hello@frankoclothing.com"><i class="bi bi-envelope me-2"></i>Email Us</a>
+          <a href="#"><i class="bi bi-geo-alt me-2"></i>DMV Area, USA</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 FRANKO CLOTHING. All rights reserved.</span>
+      <span>Designed for the distinguished gentleman.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">$0</span></div>
+    <button class="btn btn-primary cart-checkout-btn" onclick="checkoutViaWhatsApp()">
+      <i class="bi bi-whatsapp"></i> Checkout via WhatsApp
+    </button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>

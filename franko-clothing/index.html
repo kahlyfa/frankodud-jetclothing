@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FRANKO CLOTHING — Refined Menswear for the Modern Gentleman</title>
+  <meta name="description" content="Premium menswear — suits, shirts, shoes, and accessories crafted for the distinguished man." />
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* ---- HERO SECTION ---- */
+    .hero {
+      min-height: 100vh;
+      background: var(--off-white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 5rem 4rem 5rem 5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      display: block;
+      width: 36px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 5.5vw, 5.2rem);
+      font-weight: 300;
+      line-height: 1.05;
+      color: var(--black);
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-dark);
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.9;
+      max-width: 360px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-image-col {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-image-col .img-placeholder {
+      height: 100%;
+      min-height: 100vh;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    /* Decorative geometric accent */
+    .hero-accent {
+      position: absolute;
+      bottom: 3rem;
+      left: 4rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hero-stat {
+      text-align: center;
+    }
+
+    .hero-stat-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--black);
+      line-height: 1;
+    }
+
+    .hero-stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 0.2rem;
+    }
+
+    .hero-stat-divider {
+      width: 1px;
+      height: 40px;
+      background: var(--border);
+    }
+
+    /* ---- MARQUEE STRIP ---- */
+    .marquee-strip {
+      background: var(--black);
+      padding: 0.9rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .marquee-inner {
+      display: inline-flex;
+      animation: marquee 22s linear infinite;
+      gap: 0;
+    }
+
+    .marquee-item {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      padding: 0 2.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .marquee-item i {
+      color: var(--gold);
+      font-size: 0.6rem;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ---- CATEGORIES SECTION ---- */
+    .categories-section {
+      padding: 6rem 0;
+      background: var(--white);
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+
+    .category-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      aspect-ratio: 2/3;
+      background: var(--cream);
+    }
+
+    .category-card:first-child {
+      grid-row: span 2;
+      aspect-ratio: auto;
+    }
+
+    .category-card .img-placeholder {
+      min-height: 100%;
+      height: 100%;
+    }
+
+    .category-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+      padding: 2rem 1.4rem 1.4rem;
+      transform: translateY(10px);
+      transition: var(--transition);
+    }
+
+    .category-card:hover .category-overlay {
+      transform: translateY(0);
+    }
+
+    .category-name {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+
+    .category-count {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+
+    .category-arrow {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: var(--transition);
+    }
+
+    .category-card:hover .category-arrow {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* ---- FEATURED SECTION ---- */
+    .featured-section {
+      padding: 6rem 0;
+      background: var(--cream);
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    /* ---- OUR STORY STRIP ---- */
+    .story-strip {
+      background: var(--black);
+      padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-strip-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .story-strip-image {
+      aspect-ratio: 4/5;
+      background: rgba(255,255,255,0.05);
+      position: relative;
+    }
+
+    .story-strip-image .img-placeholder {
+      color: rgba(255,255,255,0.3);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .story-strip-image::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 120px;
+      height: 120px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+      z-index: 1;
+    }
+
+    .story-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+    }
+
+    .story-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .story-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .story-text {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.9;
+      margin-bottom: 2rem;
+    }
+
+    /* ---- TESTIMONIALS ---- */
+    .testimonials-section {
+      padding: 6rem 0;
+      background: var(--off-white);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      padding: 2rem;
+      border: 1px solid var(--border);
+      position: relative;
+    }
+
+    .testimonial-quote-icon {
+      font-size: 2.5rem;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 1rem;
+      font-family: var(--font-display);
+    }
+
+    .testimonial-text {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--mid);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .testimonial-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    .testimonial-name {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .testimonial-role {
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: var(--mid);
+    }
+
+    .stars {
+      color: var(--gold);
+      font-size: 0.75rem;
+      margin-bottom: 0.8rem;
+    }
+
+    /* Responsive Hero */
+    @media (max-width: 992px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-image-col {
+        display: none;
+      }
+      .hero-content {
+        padding: 4rem 2rem;
+        text-align: center;
+      }
+      .hero-eyebrow { justify-content: center; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .hero-actions { justify-content: center; }
+      .hero-accent { left: 50%; transform: translateX(-50%); }
+      .category-grid { grid-template-columns: repeat(2, 1fr); }
+      .category-card:first-child { grid-row: auto; }
+      .featured-grid { grid-template-columns: repeat(2, 1fr); }
+      .story-strip-inner { grid-template-columns: 1fr; }
+      .story-strip-image { display: none; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 576px) {
+      .category-grid { grid-template-columns: 1fr; }
+      .featured-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =====================
+     NAVIGATION
+     ===================== -->
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand"><img src="images/logo.png" alt="FRANKO CLOTHING" class="nav-logo"></a>
+
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="pages/shop.html">Shop</a>
+    <a href="pages/about.html">Our Story</a>
+    <a href="pages/contact.html">Contact</a>
+  </div>
+
+  <div class="d-flex align-items-center gap-3">
+    <!-- Cart trigger -->
+    <div class="nav-cart" onclick="openCart()" title="View Cart">
+      <i class="bi bi-bag"></i>
+      <span class="cart-badge" style="display:none;">0</span>
+    </div>
+    <!-- Hamburger for mobile -->
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Navigation Drawer -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="index.html">Home</a>
+  <a href="pages/shop.html">Shop</a>
+  <a href="pages/about.html">Our Story</a>
+  <a href="pages/contact.html">Contact</a>
+</div>
+
+<!-- =====================
+     SECTION 1: HERO
+     ===================== -->
+<section class="hero">
+  <!-- Left: Content -->
+  <div class="hero-content">
+    <div class="hero-eyebrow reveal">New Collection 2025</div>
+
+    <h1 class="hero-title reveal" style="transition-delay:0.1s;">
+      Dress with<br>
+      <em>Intention.</em><br>
+      Lead with Style.
+    </h1>
+
+    <p class="hero-desc reveal" style="transition-delay:0.2s;">
+      Premium menswear crafted for the man who commands every room.
+      Suits, shirts, shoes and accessories — refined for the modern gentleman.
+    </p>
+
+    <div class="hero-actions reveal" style="transition-delay:0.3s;">
+      <a href="pages/shop.html" class="btn btn-primary">
+        <i class="bi bi-grid-3x3-gap"></i> Explore Collection
+      </a>
+      <a href="pages/about.html" class="btn btn-outline">
+        <i class="bi bi-book"></i> Our Story
+      </a>
+    </div>
+
+    <!-- Stats row -->
+    <div class="hero-accent reveal" style="transition-delay:0.4s;">
+      <div class="hero-stat">
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Products</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">DMV</div>
+        <div class="hero-stat-label">Based</div>
+      </div>
+      <div class="hero-stat-divider"></div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Premium</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right: Hero Image -->
+  <div class="hero-image-col">
+    <img src="images/hero/hero-main.jpg" alt="Hero Model" loading="lazy" style="width:100%;height:100%;object-fit:cover; object-position: bottom;">
+  </div>
+</section>
+
+<!-- =====================
+     MARQUEE STRIP
+     ===================== -->
+<div class="marquee-strip">
+  <div class="marquee-inner">
+    <!-- First set -->
+    <span class="marquee-item">Premium Suits <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">Luxury Shirts <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">Fine Shoes <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">Exclusive Accessories <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">Walking Sticks & Staffs <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">New Arrivals 2025 <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">DMV's Finest <i class="bi bi-diamond-fill"></i></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="marquee-item">Premium Suits <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">Luxury Shirts <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">Fine Shoes <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">Exclusive Accessories <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">Walking Sticks & Staffs <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">New Arrivals 2025 <i class="bi bi-diamond-fill"></i></span>
+    <span class="marquee-item">DMV's Finest <i class="bi bi-diamond-fill"></i></span>
+  </div>
+</div>
+
+<!-- =====================
+     SECTION 2: CATEGORIES
+     ===================== -->
+<section class="categories-section">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label">Shop by Category</div>
+      <h2 class="section-title">The Complete<br>Gentleman's Collection</h2>
+      <div class="gold-line centered"></div>
+    </div>
+
+    <div class="category-grid stagger-children">
+
+      <!-- Suits - tall card -->
+      <a href="pages/shop.html?cat=suits" class="category-card reveal">
+        <img src="images/suits/grey-and-black-suit.jpg" alt="Suits Collection" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div class="category-overlay">
+          <div class="category-name">Suits</div>
+          <div class="category-count">Explore Collection</div>
+        </div>
+        <div class="category-arrow"><i class="bi bi-arrow-up-right"></i></div>
+      </a>
+
+      <!-- Shirts -->
+      <a href="pages/shop.html?cat=shirts" class="category-card reveal">
+        <img src="images/shirts/IMG_20260327_170006_315.jpg" alt="Shirts Collection" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div class="category-overlay">
+          <div class="category-name">Shirts</div>
+          <div class="category-count">Explore Collection</div>
+        </div>
+        <div class="category-arrow"><i class="bi bi-arrow-up-right"></i></div>
+      </a>
+
+      <!-- Shoes -->
+      <a href="pages/shop.html?cat=shoes" class="category-card reveal">
+        <img src="images/shoes/shoes-001 (1).jpg" alt="Shoes Collection" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div class="category-overlay">
+          <div class="category-name">Shoes</div>
+          <div class="category-count">Explore Collection</div>
+        </div>
+        <div class="category-arrow"><i class="bi bi-arrow-up-right"></i></div>
+      </a>
+
+      <!-- Accessories -->
+      <a href="pages/shop.html?cat=accessories" class="category-card reveal">
+        <img src="images/accessories/KEMISANT Men Belt 2Pack – Genuine Leather Belt for Men Dress Casual Golf Jeans 1 3_8_.jfif" alt="Accessories" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+        <div class="category-overlay">
+          <div class="category-name">Accessories</div>
+          <div class="category-count">Explore Collection</div>
+        </div>
+        <div class="category-arrow"><i class="bi bi-arrow-up-right"></i></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 3: FEATURED PRODUCTS
+     ===================== -->
+<section class="featured-section">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end reveal flex-wrap gap-3">
+      <div>
+        <div class="section-label">Featured</div>
+        <h2 class="section-title">New Arrivals</h2>
+        <div class="gold-line"></div>
+      </div>
+      <a href="pages/shop.html" class="btn btn-outline">
+        View All <i class="bi bi-arrow-right ms-1"></i>
+      </a>
+    </div>
+
+    <div class="featured-grid stagger-children mt-4">
+
+      <!-- Product 1 -->
+      <div class="product-card reveal" data-category="suits">
+        <div class="product-image">
+          <img src="images/suits/blue-suit.jpg" alt="The Executive Suit" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">New</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('The Executive Suit', 480, 'Suits', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('The Executive Suit', 480)">
+              <i class="bi bi-whatsapp"></i> Buy Now
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Suits</div>
+          <div class="product-name">The Executive Suit</div>
+          <div class="product-price">$480</div>
+        </div>
+      </div>
+
+      <!-- Product 2 -->
+      <div class="product-card reveal" data-category="shirts">
+        <div class="product-image">
+          <img src="images/shirts/IMG_20260327_170006_315.jpg" alt="Oxford Dress Shirt" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Oxford Dress Shirt', 95, 'Shirts', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Oxford Dress Shirt', 95)">
+              <i class="bi bi-whatsapp"></i> Buy Now
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shirts</div>
+          <div class="product-name">Oxford Dress Shirt</div>
+          <div class="product-price">$95</div>
+        </div>
+      </div>
+
+      <!-- Product 3 -->
+      <div class="product-card reveal" data-category="shoes">
+        <div class="product-image">
+          <img src="images/shoes/shoes-001 (2).jpg" alt="Oxford Leather Derby" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+          <div class="product-badge">Bestseller</div>
+          <div class="product-actions-overlay">
+            <button class="btn btn-primary" onclick="addToCart('Oxford Leather Derby', 220, 'Shoes', '')">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+            <button class="btn btn-white" onclick="buyNow('Oxford Leather Derby', 220)">
+              <i class="bi bi-whatsapp"></i> Buy Now
+            </button>
+          </div>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Shoes</div>
+          <div class="product-name">Oxford Leather Derby</div>
+          <div class="product-price">$220</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 4: OUR STORY STRIP ===================== -->
+<section class="story-strip">
+  <div class="container">
+    <div class="story-strip-inner">
+
+      <div class="story-strip-image reveal reveal-left">
+        <img src="images/about/founder-franko.jpg" alt="Founder" loading="lazy" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+
+      <div class="reveal reveal-right">
+        <div class="story-label">About Franko</div>
+        <h2 class="story-title">
+          Built on the belief that<br>
+          <em>style is a statement</em>
+        </h2>
+        <p class="story-text">
+          FRANKO CLOTHING was born in the DMV — a brand for men who carry themselves
+          with purpose. Every piece in our collection is selected to elevate your presence,
+          from boardrooms to occasions that demand distinction.
+        </p>
+        <p class="story-text">
+          Founder Franko Bud'jet built this brand on one conviction:
+          a well-dressed man is a confident man, and a confident man changes rooms.
+        </p>
+        <a href="pages/about.html" class="btn btn-outline-gold">
+          <i class="bi bi-book"></i> Read Our Story
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 5: TESTIMONIALS
+     ===================== -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="text-center reveal">
+      <div class="section-label">Client Reviews</div>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="gold-line centered"></div>
+    </div>
+
+    <div class="testimonials-grid stagger-children mt-5">
+
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-icon">"</div>
+        <div class="stars">
+          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+        </div>
+        <p class="testimonial-text">
+          Ordered a three-piece suit and the quality exceeded every expectation.
+          The attention to fit and detail is unmatched. Franko is my go-to for every formal occasion.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar"><i class="bi bi-person-circle"></i></div>
+          <div>
+            <div class="testimonial-name">Marcus T.</div>
+            <div class="testimonial-role">Washington D.C.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-icon">"</div>
+        <div class="stars">
+          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i>
+        </div>
+        <p class="testimonial-text">
+          The walking staff I purchased was a conversation piece at every event.
+          Masterfully crafted, truly one of a kind. FRANKO delivers on every promise.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar"><i class="bi bi-person-circle"></i></div>
+          <div>
+            <div class="testimonial-name">David K.</div>
+            <div class="testimonial-role">Virginia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="testimonial-quote-icon">"</div>
+        <div class="stars">
+          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+          <i class="bi bi-star-half"></i>
+        </div>
+        <p class="testimonial-text">
+          I walked into a room wearing the Oxford Derby and got three compliments
+          before I even reached my table. That says everything about Franko's quality.
+        </p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar"><i class="bi bi-person-circle"></i></div>
+          <div>
+            <div class="testimonial-name">James O.</div>
+            <div class="testimonial-role">Maryland</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- =====================
+     SECTION 6: FOOTER
+     ===================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Brand column -->
+      <div class="reveal">
+        <div class="footer-brand-name">FRANKO<span>_CLOTHING</span></div>
+        <p class="footer-tagline">
+          Premium menswear for the modern gentleman. Based in the DMV.
+          Shipped with intention, worn with distinction.
+        </p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-link" title="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-link" title="TikTok"><i class="bi bi-tiktok"></i></a>
+          <a href="#" class="social-link" title="X / Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="https://wa.me/2347068935733" class="social-link" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- Shop links -->
+      <div class="reveal">
+        <div class="footer-heading">Shop</div>
+        <div class="footer-links">
+          <a href="pages/shop.html?cat=suits">Suits</a>
+          <a href="pages/shop.html?cat=shirts">Shirts</a>
+          <a href="pages/shop.html?cat=shoes">Shoes</a>
+          <a href="pages/shop.html?cat=accessories">Accessories</a>
+          <a href="pages/shop.html">New Arrivals</a>
+        </div>
+      </div>
+
+      <!-- Company links -->
+      <div class="reveal">
+        <div class="footer-heading">Company</div>
+        <div class="footer-links">
+          <a href="pages/about.html">Our Story</a>
+          <a href="pages/contact.html">Contact Us</a>
+          <a href="#">Lookbook</a>
+          <a href="#">Size Guide</a>
+        </div>
+      </div>
+
+      <!-- Contact info -->
+      <div class="reveal">
+        <div class="footer-heading">Get in Touch</div>
+        <div class="footer-links">
+          <a href="https://wa.me/2347068935733"><i class="bi bi-whatsapp me-2"></i>WhatsApp Us</a>
+          <a href="mailto:hello@frankoclothing.com"><i class="bi bi-envelope me-2"></i>Email Us</a>
+          <a href="#"><i class="bi bi-geo-alt me-2"></i>DMV Area, USA</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer bottom bar -->
+    <div class="footer-bottom">
+      <span>&copy; 2025 FRANKO CLOTHING. All rights reserved.</span>
+      <span>Designed for the distinguished gentleman.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- =====================
+     CART SIDEBAR
+     ===================== -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()"><i class="bi bi-x-lg"></i></button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span>Total</span>
+      <span id="cartTotal">$0</span>
+    </div>
+    <button class="btn btn-primary cart-checkout-btn" onclick="checkoutViaWhatsApp()">
+      <i class="bi bi-whatsapp"></i> Checkout via WhatsApp
+    </button>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Main JS -->
+<script src="js/main.js"></script>
+</body>
+</html>
