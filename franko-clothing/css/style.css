@@ -225,7 +225,7 @@ ul {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--dark);
+  background: var(--gold);
   transition: var(--transition);
 }
 
