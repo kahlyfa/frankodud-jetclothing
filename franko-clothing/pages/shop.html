@@ -1021,6 +1021,48 @@
   document.querySelectorAll('.filter-tab').forEach(tab => {
     tab.addEventListener('click', () => setTimeout(updateResultCount, 50));
   });
+
+</script>
+<!-- Lightbox -->
+<div id="lightbox" style="
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(0,0,0,0.92); align-items:center;
+  justify-content:center; cursor:zoom-out;">
+  <img id="lightboxImg" src="" alt="" style="
+    max-width:90vw; max-height:90vh;
+    object-fit:contain; box-shadow:0 0 60px rgba(0,0,0,0.5);">
+  <button onclick="closeLightbox()" style="
+    position:fixed; top:1.5rem; right:2rem;
+    background:none; border:none; color:#fff;
+    font-size:2rem; cursor:pointer; line-height:1;">&#x2715;</button>
+</div>
+
+<script>
+  // Open lightbox on product image click
+  document.querySelectorAll('.product-image img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => {
+      const lb = document.getElementById('lightbox');
+      document.getElementById('lightboxImg').src = img.src;
+      lb.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // Close on overlay click
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+  });
 </script>
 </body>
 </html>

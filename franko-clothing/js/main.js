@@ -4,7 +4,7 @@
    ========================================= */
 
 /* WhatsApp number for the client */
-const WHATSAPP_NUMBER = '2347068935733'; // Nigeria country code + number
+const WHATSAPP_NUMBER = '2408605101'; 
 
 /* =========================================
    CART STATE
@@ -75,7 +75,7 @@ function updateCartUI() {
       <div class="cart-empty">
         <i class="bi bi-bag-x"></i>
         <p>Your cart is empty</p>
-        <a href="pages/shop.html" class="btn btn-outline" style="font-size:0.7rem;">Explore Collection</a>
+        <a href="/pages/shop.html" class="btn btn-outline" style="font-size:0.7rem;">Explore Collection</a>
       </div>`;
   } else {
     cartItemsContainer.innerHTML = cart.map(item => `
